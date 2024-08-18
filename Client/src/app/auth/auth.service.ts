@@ -15,7 +15,7 @@ export class AuthService {
 
   isLoggedIn = false;
 
-  private apiUrl = 'http://localhost:1102/api';
+  private apiUrl = 'https://task-management-system-bmkm.onrender.com/api';
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient) {}

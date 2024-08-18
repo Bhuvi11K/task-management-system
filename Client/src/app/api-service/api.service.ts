@@ -10,7 +10,7 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:1102/api';
+  private apiUrl = 'https://task-management-system-bmkm.onrender.com/api';
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient) {}
