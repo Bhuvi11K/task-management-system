@@ -1,0 +1,156 @@
+<mat-card class="admin-dashboard" fxLayout.lt-md="column" fxLayout="row">
+
+  <div fxFlex.lt-md="100%" fxFlex="36">
+
+    <div fxLayout="row" class="members-container">
+
+      <div fxFlex="33" fxLayout="column" *ngIf="managers.length>0">
+        <mat-list id="manager-list" >
+          <h3 fxLayoutAlign="center center"> Managers</h3>
+          <mat-list-item *ngFor="let manager of managers" id="manager-list-member"
+            [class.selected]="manager.name === managerName" (click)="getTeam(manager.id)"
+            (click)="selectedManager(manager)">
+            <p>{{ manager.name | titlecase}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div fxFlex="33" fxLayout="column"  *ngIf="juniorDevelopers.length>0">
+        <mat-list id="developer-list">
+          <h3 fxLayoutAlign="center center">Developers</h3>
+          <mat-list-item *ngFor="let developer of juniorDevelopers"
+            (click)="getAssignedTasks(developer.id,developer.name)" id="developer-list-member"
+            [class.selected]="isDeveloperMappedToManager(developer)" [class.devDelected]="developer.name === jrDevName">
+            <p>{{ developer.name | titlecase}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div fxFlex="33" fxLayout="column"  *ngIf="unmappedDevelopers.length>0">
+        <mat-list id="um-developer-list">
+          <h3>Unmapped Developers</h3>
+          <mat-list-item *ngFor="let developer of unmappedDevelopers" id="um-developer-list-member">
+            <p *ngIf="unmappedDevelopers.length>0">{{ developer.name | titlecase}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+
+      <div fxLayoutAlign="center center">
+        <button id="new-btn" mat-raised-button color="primary" (click)=" openTeamDialog()">
+          New <mat-icon> group_add</mat-icon> </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div fxFlex.lt-md="100%" fxFlex="64" class="admin-dashboard-right" fxLayout="column"
+    *ngIf="managerName !==''&& displayTask===false">
+
+    <div fxLayout="row" *ngIf="developers.length>0" fxLayoutAlign="center center">
+      <h3> {{ managerName | titlecase}}'s Team </h3>
+      <mat-icon mat-button color="warn" id="del-btn" (click)="openDeleteTeamDialog()">
+        group_remove
+      </mat-icon>
+    </div>
+
+    <div *ngIf="developers.length>0" fxLayoutAlign.gt-md="center center" fxLayout="row">
+      <div fxFlex.lt-md="95" fxFlex="80" class="table">
+
+        <section class="table-container mat-elevation-z8" tabindex="0">
+
+          <table mat-table [dataSource]="developers">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name | titlecase}} </td>
+            </ng-container>
+
+            <!-- Role Column -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef> Role </th>
+              <td mat-cell *matCellDef="let element"> {{element.role | titlecase}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-icon mat-button color="warn" id="del-btn"
+                  (click)="openDeleteDevDialog(element.id)">person_remove</mat-icon>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+        </section>
+
+      </div>
+    </div>
+
+    <div *ngIf="developers.length===0" fxLayoutAlign="center center">
+      <mat-card-content class="no-devs">
+        <img src="./assets/Team with Leader.jpg">
+        <mat-list-item>
+          <p> Manager {{managerName | titlecase }}'s team has no members!</p>
+        </mat-list-item>
+      </mat-card-content>
+    </div>
+
+  </div>
+
+  <div fxFlex.lt-md="100%" fxLayout.lt-md="column" fxLayout="column" fxFlex="64"
+    *ngIf="managerName==='' && displayTask===false">
+
+    <div fxLayoutAlign="center center" style="margin-top: 20px;">
+      <img src="./assets/team.jpg" alt="Team" id="team-img">
+    </div>
+
+    <div fxLayoutAlign.gt-md="end center" fxLayoutAlign.lt-md="center center">
+      <button mat-raised-button color="primary" id="users-btn" routerLink="/users">
+        <mat-icon> group</mat-icon>Users</button>
+    </div>
+
+  </div>
+
+  <div fxFlex.lt-md="100%" fxFlex="64" class="admin-dashboard-right" fxLayout="column" *ngIf=" displayTask===true">
+
+    <div class="task-container" *ngIf="assignedTasks.length > 0">
+      <h3>ASSIGNED TASKS</h3>
+      <div *ngFor="let task of assignedTasks" fxLayoutAlign="center center" fxLayout="column">
+        <mat-toolbar id="task" fxLayoutAlign="center center">
+          <p>{{ task.task }}</p>
+        </mat-toolbar>
+      </div>
+    </div>
+
+    <div  fxLayoutAlign="center center" *ngIf="assignedTasks.length === 0">
+      <mat-card-content class="no-task">
+        <img src="./assets/noTask.jpeg">
+        <mat-list-item>
+          <p> No Task Assigned for {{jrDevName | titlecase }}</p>
+        </mat-list-item>
+      </mat-card-content>
+    </div>
+
+  </div>
+
+</mat-card>

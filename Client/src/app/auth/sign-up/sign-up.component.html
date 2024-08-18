@@ -1,0 +1,84 @@
+<mat-card class="sign-up-container" fxLayout.lt-md="column" fxLayout="row">
+
+    <div id="signup-left" fxHide.lt-md fxFlex.lt-md="100%" fxFlex="50%" fxLayout.lt-md="column" fxLayout="row" fxLayoutAlign="center center">
+        <img src="./assets/sign-up.jpg" alt="Sign up">
+    </div>
+
+    <div fxFlex.lt-md="100%" fxFlex="50%" class="sign-up-form">
+        <div>
+            <mat-card *ngIf="isLoading" fxLayoutAlign="center center" class="loader">
+                <div>
+                    <mat-spinner></mat-spinner>
+                </div>
+            </mat-card>
+            <mat-card *ngIf="!isLoading">
+                <img src="./assets/sign-up.jpg" alt="Sign up" fxHide.gt-md id="signup-img">
+
+                <mat-card-header>
+                    <mat-toolbar style="margin-bottom: 20px;" fxLayoutAlign="center center">SIGN UP</mat-toolbar>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="signupForm" fxLayoutAlign="stretch" fxLayout="column">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxLayoutGap="5px">
+                                <mat-form-field fxFlex="50%">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="name" placeholder="Name" type="text">
+                                    <mat-error
+                                        *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
+                                        Please enter a your name.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field fxFlex="50%">
+                                    <mat-label>Select Role</mat-label>
+                                    <mat-select formControlName="role" placeholder="Select Role">
+                                        <mat-option value="Admin">Admin</mat-option>
+                                        <mat-option value="Manager">Manager</mat-option>
+                                        <mat-option value="Jr Developer">Jr Developer</mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="signupForm.get('role')?.invalid && (signupForm.get('role')?.dirty || signupForm.get('role')?.touched)">
+                                        Please select a role.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="5px">
+                                <mat-form-field fxFlex="50%">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email" placeholder="Email" type="email">
+                                    <mat-error
+                                        *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+                                        Please enter a valid email address.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field fxFlex="50%">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput formControlName="password" placeholder="Password" type="password" [type]="hide?'password':'text'">
+                                    <i class="material-icons" id="eye-icon" matSuffix (click)="hide=!hide">
+                                        {{hide?'visibility':'visibility_off'}}</i>
+                                    <mat-error
+                                        *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+                                        Please enter a password.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+
+                    <button mat-raised-button color="primary" class="mat-button-disabled" type="submit"
+                        (click)="onSubmit()" [disabled]="signupForm.invalid" fxFlex="96%">
+                        Sign up
+                    </button>
+
+                </mat-card-actions>
+
+                <div fxLayout="row" fxLayoutAlign="center center" id="member" routerLink="/signin">
+                    <p>Already a member? <span style="color:#3f51b5"> Log in</span> </p>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+</mat-card>

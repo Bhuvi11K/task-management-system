@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" fxLayoutAlign="center center">Delete Developer</mat-toolbar>
+
+<div mat-dialog-content id="pb-0">
+    <form [formGroup]="delDevForm">
+        <div fxLayout="column">
+            <mat-form-field fxFlex="stretch">
+                <mat-label>Select a Developer</mat-label>
+                <mat-select formControlName="developer">
+                    <mat-option *ngFor="let developer of developers" [value]="developer.id">{{ developer.name |
+                        titlecase}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="delDevForm.get('developer')?.invalid && delDevForm.get('developer')?.touched">
+                    Please select a developer.
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+    </form>
+</div>
+
+
+<div mat-dialog-actions fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" [disabled]="delDevForm.invalid" (click)="deleteDev()">Delete</button>
+    <button mat-raised-button type="button" (click)="dialogRef.close()">Cancel</button>
+</div>

@@ -1,0 +1,50 @@
+<mat-card class="profile-container" fxLayout.lt-md="column" fxLayout="row">
+
+    <div  fxFlex.lt-md="100%" fxFlex="50"  fxLayoutAlign="center center">
+        <img src="./assets/profile.jpg" alt="Profile" id="profile-img">
+    </div>
+
+    <div fxFlex.lt-md="100" fxFlex="50">
+        <div class="profile-card"  >
+            <mat-card class="profile-card-data" >
+                <mat-card-header>
+                    <mat-toolbar id="profile-card-header">
+                        <h3>Welcome {{ userData.name }}!</h3>
+                    </mat-toolbar>
+                </mat-card-header>
+                <mat-card-content fxLayout="row" id="profile-card-body">
+                    <div fxFlex.lt-md="40" fxFlex="50" fxLayoutAlign="center center" fxLayout="column">
+                        <div>
+                            <img src="./assets/user.jpg" alt="user"  fxLayoutAlign="center center">
+                        </div>
+                        <div>
+                            <button mat-raised-button color="primary" fxLayoutAlign="center center"
+                                style="margin-top: 10px;" (click)="openProfileEditDialog()">
+                                Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                    <div fxFlex.lt-md="60" fxFlex="50" fxLayoutAlign="start center">
+                        <mat-list>
+                            <mat-list-item id="user-data">
+                                <span matListItemTitle>Name</span>
+                                <span matListItemLine>{{ userData.name }}</span>
+                            </mat-list-item>
+                            <mat-list-item id="user-data">
+                                <span matListItemTitle>Role</span>
+                                <span matListItemLine>{{ userData.role }}</span>
+                            </mat-list-item>
+                            <mat-list-item id="user-data">
+                                <span matListItemTitle>Email</span>
+                                <span matListItemLine>{{ userData.email }}</span>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+   
+
+</mat-card>

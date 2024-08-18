@@ -1,0 +1,45 @@
+
+<div *ngIf="!isLoading"> 
+
+<mat-toolbar color="primary" fxLayoutAlign="center center">Assign Task</mat-toolbar>
+
+<div mat-dialog-content id="pb-0">
+    <form [formGroup]="taskForm">
+        <div fxLayout="column">
+
+            <div fxLayout="row">
+                <mat-form-field fxFlex="stretch">
+                    <mat-label>Select Developer</mat-label>
+                    <mat-select formControlName="developer">
+                      <mat-option *ngFor="let developer of developers" [value]="developer.id">{{ developer.name | titlecase}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="taskForm.get('developer')?.invalid && taskForm.get('developer')?.touched">
+                      Please select a Developer.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxLayout="row">
+                <mat-form-field fxFlex="stretch">
+                    <textarea matInput formControlName="task" placeholder="Task"></textarea>
+                    <mat-error *ngIf="taskForm.get('task')?.invalid && taskForm.get('task')?.touched">
+                      Please enter a task.
+                    </mat-error>
+                  </mat-form-field>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" [disabled]="taskForm.invalid" (click)="addTask()">Add</button>
+    <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
+</div>
+
+</div>
+
+<div *ngIf="isLoading" fxLayoutAlign="center center">
+  <mat-spinner></mat-spinner>
+</div>

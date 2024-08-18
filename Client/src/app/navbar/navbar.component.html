@@ -1,0 +1,83 @@
+<mat-toolbar color="primary" class="navbar">
+
+  <div id="logo">
+    <img src="./assets/TMS - Clock Logo.jpeg" alt="logo">
+    <h4>Task Management System</h4>
+  </div>
+  <div *ngIf="authService.isLoggedIn" id="menu-items">
+    <!-- <button mat-button routerLink="/users" routerLinkActive="activeRoute" *ngIf="userRole==='Admin'"> -->
+    <button mat-button routerLink="/users" routerLinkActive="activeRoute" *ngIf="showUser">
+      <mat-icon> group</mat-icon>
+      <p>Users</p>
+    </button>
+    <button mat-button routerLink="/dashboard" routerLinkActive="activeRoute">
+      <!-- [routerLinkActiveOptions]="{exact:true}" -->
+      
+      <mat-icon> dashboard</mat-icon>
+      <p>Dashboard</p>
+    </button>
+    <button mat-button routerLink="/profile" routerLinkActive="activeRoute">
+      <mat-icon> account_circle</mat-icon>
+      <p>Profile</p>
+    </button>
+    <button mat-button (click)="openLogoutDialog()">
+      <mat-icon> logout</mat-icon>Logout</button>
+
+  </div>
+  <div *ngIf="!authService.isLoggedIn" id="menu-items">
+    <button mat-button routerLink="/signin" routerLinkActive="activeRoute">
+      <mat-icon>login</mat-icon>
+      <p> Sign in </p>
+    </button>
+    <button mat-button routerLink="/signup" routerLinkActive="activeRoute">
+      <mat-icon> person_add</mat-icon>
+      <p> Sign up </p>
+    </button>
+  </div>
+
+  <!-- [queryParams]="{allowSignup:'1',newuser:'yes'}" 
+      fragment='loading'-->
+  <!-- ?allowSignup=1?newuser=yes#loading -->
+
+  
+
+  <div id="menuIcon">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="side" opened>
+    <div *ngIf="authService.isLoggedIn" id="side-menu-items">
+      <button mat-button (click)="sidenav.close()" routerLink="/profile" routerLinkActive="activeRoute">
+        <mat-icon> account_circle</mat-icon>
+        <p> Profile </p>
+      </button>
+      <button mat-button (click)="sidenav.close()" routerLink="/dashboard" routerLinkActive="activeRoute">
+        <mat-icon> dashboard</mat-icon>
+        <p> Dashboard </p>
+      </button>
+      <!-- <button mat-button (click)="sidenav.close()" routerLink="/users" routerLinkActive="activeRoute" *ngIf="userRole==='Admin'"> -->
+      <button mat-button (click)="sidenav.close()" routerLink="/users" routerLinkActive="activeRoute" *ngIf="showUser">
+        <mat-icon> group</mat-icon>
+        <p> Users </p>
+      </button>
+      <button mat-button (click)="openLogoutDialog()">
+        <mat-icon> logout</mat-icon>Logout</button>
+    </div>
+
+    <div *ngIf="!authService.isLoggedIn" id="side-menu-items">
+      <button mat-button (click)="sidenav.close()" routerLink="/signin" routerLinkActive="activeRoute">
+        <mat-icon>login</mat-icon>
+        <p> Sign in </p>
+      </button>
+      <button mat-button (click)="sidenav.close()" routerLink="/signup" routerLinkActive="activeRoute">
+        <mat-icon> person_add</mat-icon>
+        <p> Sign up </p>
+      </button>
+    </div>
+  </mat-sidenav>
+</mat-sidenav-container>

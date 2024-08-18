@@ -1,0 +1,30 @@
+<div>
+
+    <mat-toolbar color="primary" fxLayoutAlign="center center">Edit Task</mat-toolbar>
+
+    <div mat-dialog-content id="pb-0">
+        <form [formGroup]="taskEditForm">
+            <div fxLayout="column">
+
+
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="stretch">
+                        <textarea matInput formControlName="task" placeholder="Task"></textarea>
+                        <mat-error *ngIf="taskEditForm.get('task')?.invalid && taskEditForm.get('task')?.touched">
+                            Please enter a task.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+    <div mat-dialog-actions fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" [disabled]="taskEditForm.invalid"
+            (click)="updateTask()">Update</button>
+        <button mat-raised-button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+
+</div>

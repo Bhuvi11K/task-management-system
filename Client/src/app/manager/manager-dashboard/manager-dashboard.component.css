@@ -1,0 +1,224 @@
+.manager-dashboard {
+  height: 469px;
+  margin: 10px;
+}
+
+.members-container {
+  height: 398px;
+  width: 100%;
+  overflow: auto;
+}
+
+#developer-list {
+  margin-left: 114px;
+}
+
+#developer-list h3 {
+  margin: 15px 0px 20px 8px;
+  color: #3f51b5 !important;
+  font-size: 17px !important;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+}
+
+#deveoper-list-member {
+  margin-top: 6px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  height: 30px;
+  width: 130px;
+  text-align: center;
+}
+
+#deveoper-list-member p {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+#deveoper-list-member:hover {
+  background-color: #3f51b5;
+  cursor: pointer;
+}
+
+#deveoper-list-member:hover p {
+  color: white !important;
+}
+
+.selected {
+  background-color: #3f51b5 !important;
+}
+
+.selected p {
+  color: white !important;
+}
+
+#add-task-btn {
+  margin-left: 37px;
+}
+
+.manager-dashboard-right {
+  background-color: #f5f5f5;
+  overflow: auto;
+  height: 469px;
+}
+
+.manager-dashboard-right h3 {
+  margin: 20px 0px 20px 25px;
+  color: #3f51b5 !important;
+  font-size: 17px !important;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+}
+
+#dashboard-img,
+#no-task-img {
+  height: 350px;
+  border-radius: 10px;
+}
+
+#task {
+  height: 60px;
+  width: 90%;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  padding: 10px;
+}
+
+#task p {
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+#task:hover {
+  background-color: #3f51b5 !important;
+  color: #fff;
+  cursor: pointer;
+}
+
+#taskTime {
+  font-size: 13px !important;
+  background-color: #3f51b5 !important;
+  color: #fff !important;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#task-edit-btn {
+  color: #3f51b5 !important;
+}
+
+#task-edit-btn,
+#task-del-btn {
+  font-size: 25px !important;
+}
+
+#task:hover #taskTime,
+#task:hover #task-btn {
+  background-color: #fff !important;
+  color: #3f51b5 !important;
+}
+
+#task:hover #taskTime p {
+  background-color: #fff !important;
+  color: #3f51b5 !important;
+}
+
+#task:hover #task-edit-btn,
+#task:hover #task-del-btn,
+#task-edit-btn:hover,
+#task-del-btn:hover {
+  color: #fff !important;
+}
+
+.no-devs img,
+.no-task img {
+  height: 350px;
+  border-radius: 8px;
+}
+
+.no-devs p,
+.no-task p {
+  background-color: #3f51b5 !important;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  padding: 12px;
+}
+
+@media (max-width: 900px) {
+  .manager-dashboard {
+    height: 860px;
+    margin: 0px;
+    box-shadow: none;
+  }
+
+  .members-container {
+    height: 320px;
+    width: 100%;
+    overflow: auto;
+  }
+
+  #developer-list {
+    margin-left: 134px;
+  }
+
+  #add-task-btn {
+    margin: 25px 0px 25px 40px;
+  }
+
+  #manager-dashboard-right {
+    height: 400px;
+  }
+
+  #no-task-img,
+  #dashboard-img {
+    height: 250px;
+    margin: 30px 0px;
+  }
+
+  #task {
+    width: 95%;
+  }
+
+  #task p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  #taskTime {
+    font-size: 9px !important;
+    background-color: #3f51b5 !important;
+    color: #fff !important;
+    border-radius: 5px;
+    padding: 6px;
+  }
+
+  #task-btn {
+    height: 30px;
+    width: 30px;
+  }
+
+  #task-edit-btn,
+  #task-del-btn {
+    font-size: 20px !important;
+  }
+
+  .no-devs img,
+  .no-task img {
+    height: 280px;
+    margin-top: 30px;
+  }
+
+  .no-devs,
+  .no-task {
+    text-align: center;
+  }
+
+  .no-devs p,
+  .no-task p {
+    padding: 14px;
+    font-size: 14px;
+  }
+}

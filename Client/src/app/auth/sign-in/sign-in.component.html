@@ -1,0 +1,60 @@
+<mat-card class="sign-in-container" fxLayout.lt-md="column" fxLayout="row">
+
+    <div id="signin" fxHide.lt-md fxFlex.lt-md="100%" fxFlex="50%" fxLayout.lt-md="column" fxLayout="row"
+        fxLayoutAlign="center center">
+        <img src="./assets/sign-in.jpg" alt="Sign in">
+    </div>
+
+    <div fxFlex.lt-md="100%" fxFlex="50%" class="sign-in-form">
+        <div>
+            <mat-card *ngIf="isLoading" fxLayoutAlign="center center" class="loader">
+                <div>
+                    <mat-spinner></mat-spinner>
+                </div>
+            </mat-card>
+            <mat-card *ngIf="!isLoading">
+                <img src="./assets/sign-in.jpg" alt="Sign in" fxHide.gt-md id="signin-img">
+
+                <mat-card-header>
+                    <mat-toolbar style="margin-bottom: 20px;" fxLayoutAlign="center center">SIGN IN</mat-toolbar>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <form [formGroup]="loginForm" fxLayoutAlign="streth" fxLayout="column">
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" placeholder="Email" type="email">
+                            <mat-error
+                                *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+                                Please enter a valid email address.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Password</mat-label>
+                            <input matInput formControlName="password" placeholder="Password" type="password" [type]="hide?'password':'text'">
+                            <i class="material-icons" id="eye-icon" matSuffix (click)="hide=!hide">
+                                {{hide?'visibility':'visibility_off'}}</i>
+                            <mat-error
+                                *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                                Please enter a password.
+                            </mat-error>
+                        </mat-form-field>
+
+                    </form>
+                </mat-card-content>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" (click)="onSignin()" type="submit"
+                        [disabled]="loginForm.invalid" fxFlex="96%" class="mat-button-disabled">
+                        Sign in
+                    </button>
+
+                </mat-card-actions>
+                <div fxLayout="row" fxLayoutAlign="center center" id="member" routerLink="/signup">
+                    <p>Not a member? <span style="color:#3f51b5">Signup</span> </p>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+</mat-card>
