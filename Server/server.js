@@ -16,11 +16,12 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../Client", "dist", "index.html"))
 })
 
-const PORT = 1102;
+const PORT = process.env.PORT || 1102;
 
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
